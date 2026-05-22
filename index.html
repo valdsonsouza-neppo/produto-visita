@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise de Entrevistas com Clientes · Neppo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neppo-green: #65CC65;
+    --neppo-dark: #252C3B;
+    --neppo-purple: #6C169E;
+    --neppo-white: #FFFFFF;
+    --neppo-bg: #F7F8FB;
+    --neppo-border: #E5E8EF;
+    --neppo-muted: #6B7280;
+    --neppo-dark-soft: #3A4151;
+    --shadow-sm: 0 1px 2px rgba(37,44,59,0.05);
+    --shadow-md: 0 4px 16px rgba(37,44,59,0.08);
+    --shadow-lg: 0 12px 32px rgba(37,44,59,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--neppo-bg);
+    color: var(--neppo-dark);
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    color: var(--neppo-dark);
+    letter-spacing: -0.02em;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ========== HEADER / NAV ========== */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--neppo-border);
+  }
+
+  .nav {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--neppo-dark);
+  }
+
+  .logo-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--neppo-green);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(101,204,101,0.18);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14.5px;
+    color: var(--neppo-dark-soft);
+    transition: all 0.2s;
+  }
+
+  .nav-links a:hover {
+    background: var(--neppo-bg);
+    color: var(--neppo-purple);
+  }
+
+  .nav-links a.active {
+    background: var(--neppo-dark);
+    color: var(--neppo-white);
+  }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--neppo-border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    background: linear-gradient(135deg, var(--neppo-dark) 0%, #1a2030 100%);
+    color: var(--neppo-white);
+    padding: 80px 32px 120px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -120px;
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, rgba(101,204,101,0.22) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -200px;
+    left: -100px;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, rgba(108,22,158,0.28) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-content {
+    max-width: 1240px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(101,204,101,0.16);
+    border: 1px solid rgba(101,204,101,0.35);
+    border-radius: 100px;
+    color: var(--neppo-green);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    color: var(--neppo-white);
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    max-width: 820px;
+  }
+
+  .hero h1 .accent { color: var(--neppo-green); }
+
+  .hero-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.78);
+    max-width: 720px;
+    margin-bottom: 40px;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    max-width: 880px;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 20px 22px;
+    backdrop-filter: blur(8px);
+  }
+
+  .stat-num {
+    font-family: 'Manrope', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--neppo-green);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 500;
+  }
+
+  /* ========== MAIN ========== */
+  main {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section {
+    padding: 80px 0 40px;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+    max-width: 820px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--neppo-purple);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 3.5vw, 40px);
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+
+  .section-sub {
+    font-size: 17px;
+    color: var(--neppo-muted);
+  }
+
+  /* ========== CLIENTES GRID ========== */
+  .clients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  .client-card {
+    background: var(--neppo-white);
+    border: 1px solid var(--neppo-border);
+    border-radius: 16px;
+    padding: 28px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .client-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--bar-color, var(--neppo-green));
+  }
+
+  .client-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: transparent;
+  }
+
+  .client-name {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  .client-meta {
+    color: var(--neppo-muted);
+    font-size: 13.5px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .client-meta .dot { width: 4px; height: 4px; background: var(--neppo-border); border-radius: 50%; }
+
+  .client-desc {
+    color: var(--neppo-dark-soft);
+    font-size: 14.5px;
+    margin-bottom: 20px;
+    line-height: 1.55;
+  }
+
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 100px;
+    background: var(--neppo-bg);
+    color: var(--neppo-dark-soft);
+  }
+
+  .badge.green { background: rgba(101,204,101,0.14); color: #2e7a2e; }
+  .badge.purple { background: rgba(108,22,158,0.12); color: var(--neppo-purple); }
+  .badge.warn { background: #FFF3E0; color: #B7621A; }
+
+  /* ========== CONDUÇÃO ========== */
+  .conduction-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .conduct-card {
+    background: var(--neppo-white);
+    border: 1px solid var(--neppo-border);
+    border-radius: 14px;
+    padding: 24px;
+  }
+
+  .conduct-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 16px;
+    background: rgba(101,204,101,0.16);
+  }
+
+  .conduct-icon.purple { background: rgba(108,22,158,0.14); }
+  .conduct-icon.dark { background: rgba(37,44,59,0.08); }
+
+  .conduct-card h4 {
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+
+  .conduct-card p {
+    font-size: 14.5px;
+    color: var(--neppo-muted);
+    line-height: 1.55;
+  }
+
+  /* ========== INSIGHTS ========== */
+  .insights-wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .insight-row {
+    background: var(--neppo-white);
+    border: 1px solid var(--neppo-border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 24px;
+    align-items: start;
+    transition: all 0.2s;
+  }
+
+  .insight-row:hover { border-color: var(--neppo-green); box-shadow: var(--shadow-md); }
+
+  .insight-num {
+    font-family: 'Manrope', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--neppo-purple);
+    line-height: 1;
+  }
+
+  .insight-body h4 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .insight-body p {
+    color: var(--neppo-dark-soft);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .insight-side {
+    text-align: right;
+    font-size: 12px;
+    color: var(--neppo-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  /* ========== TASKS ========== */
+  .tasks-controls {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--neppo-border);
+    background: var(--neppo-white);
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--neppo-dark-soft);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+
+  .filter-btn:hover { border-color: var(--neppo-dark); }
+  .filter-btn.active {
+    background: var(--neppo-dark);
+    border-color: var(--neppo-dark);
+    color: var(--neppo-white);
+  }
+
+  .tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 16px;
+  }
+
+  .task-card {
+    background: var(--neppo-white);
+    border: 1px solid var(--neppo-border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    border-left: 4px solid var(--task-color, var(--neppo-green));
+    transition: all 0.2s;
+  }
+
+  .task-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+  .task-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .task-client {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--neppo-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .priority {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .priority.high { background: #FEE2E2; color: #B91C1C; }
+  .priority.mid { background: #FEF3C7; color: #92400E; }
+  .priority.low { background: #DCFCE7; color: #166534; }
+
+  .task-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--neppo-dark);
+    line-height: 1.35;
+  }
+
+  .task-desc {
+    font-size: 14px;
+    color: var(--neppo-muted);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .task-foot {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .task-tag {
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--neppo-bg);
+    color: var(--neppo-dark-soft);
+  }
+
+  /* ========== TIMELINE ========== */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+    border-left: 2px dashed var(--neppo-border);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 28px;
+  }
+
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -41px;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--neppo-white);
+    border: 3px solid var(--neppo-green);
+    box-shadow: 0 0 0 4px var(--neppo-bg);
+  }
+
+  .timeline-item.purple::before { border-color: var(--neppo-purple); }
+
+  .timeline-date {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--neppo-purple);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .timeline-title {
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+
+  .timeline-text {
+    font-size: 14.5px;
+    color: var(--neppo-muted);
+    line-height: 1.55;
+  }
+
+  /* ========== CONCLUSION / CTA ========== */
+  .conclusion {
+    background: linear-gradient(135deg, var(--neppo-purple) 0%, #4a0d6e 100%);
+    color: var(--neppo-white);
+    border-radius: 24px;
+    padding: 56px 48px;
+    margin: 40px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .conclusion::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(101,204,101,0.28) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .conclusion-content { position: relative; z-index: 1; max-width: 760px; }
+
+  .conclusion h2 {
+    color: var(--neppo-white);
+    font-size: clamp(26px, 3vw, 34px);
+    margin-bottom: 16px;
+  }
+
+  .conclusion p {
+    color: rgba(255,255,255,0.85);
+    font-size: 16px;
+    margin-bottom: 22px;
+  }
+
+  .conclusion-points {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+
+  .conclusion-points li {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 14.5px;
+    display: flex;
+    gap: 12px;
+    align-items: start;
+  }
+
+  .conclusion-points .check {
+    color: var(--neppo-green);
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    background: var(--neppo-dark);
+    color: rgba(255,255,255,0.75);
+    padding: 40px 32px;
+    text-align: center;
+    font-size: 13.5px;
+  }
+
+  footer .logo { justify-content: center; color: var(--neppo-white); margin-bottom: 10px; }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 860px) {
+    .nav-toggle { display: inline-flex; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: var(--neppo-white);
+      flex-direction: column;
+      padding: 12px;
+      border-bottom: 1px solid var(--neppo-border);
+      box-shadow: var(--shadow-md);
+    }
+    .nav-links.open { display: flex; }
+    .insight-row { grid-template-columns: 48px 1fr; }
+    .insight-side { grid-column: 1 / -1; text-align: left; margin-top: 4px; }
+    .hero { padding: 60px 24px 90px; }
+    main { padding: 0 20px; }
+    section { padding: 56px 0 24px; }
+    .conclusion { padding: 40px 28px; border-radius: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <nav class="nav">
+    <a href="#topo" class="logo"><span class="logo-dot"></span>Neppo · Produto</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">Menu</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#visao-geral" class="nav-link">Visão Geral</a></li>
+      <li><a href="#clientes" class="nav-link">Clientes</a></li>
+      <li><a href="#conducao" class="nav-link">Condução</a></li>
+      <li><a href="#insights" class="nav-link">Insights</a></li>
+      <li><a href="#tarefas" class="nav-link">Tarefas</a></li>
+      <li><a href="#proximos-passos" class="nav-link">Próximos Passos</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ============= HERO ============= -->
+<section class="hero" id="topo">
+  <div class="hero-content">
+    <span class="hero-eyebrow">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      Semana de 19 a 21 de Maio · 2026
+    </span>
+    <h1>Entrevistas com clientes:<br><span class="accent">FGF, GVC e Decorlux</span></h1>
+    <p class="hero-sub">Análise consolidada das três entrevistas conduzidas pela equipe de Produto. Avaliação da condução, principais insights levantados e backlog de atividades a serem abertas para evolução da plataforma Neppo.</p>
+
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Clientes entrevistados</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">26</div>
+        <div class="stat-label">Tarefas mapeadas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">9</div>
+        <div class="stat-label">Insights estratégicos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">~3h</div>
+        <div class="stat-label">de conversa com clientes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<!-- ============= VISÃO GERAL ============= -->
+<section id="visao-geral">
+  <div class="section-header">
+    <span class="section-tag">Visão Geral</span>
+    <h2 class="section-title">O que essa rodada de entrevistas nos contou</h2>
+    <p class="section-sub">Três clientes em estágios diferentes de maturidade com a plataforma, mas com dores convergentes: gestão massiva de dados, humanização do atendimento, autonomia operacional e integração com sistemas legados (Sankhya).</p>
+  </div>
+
+  <div class="conduction-grid">
+    <div class="conduct-card">
+      <div class="conduct-icon">🎯</div>
+      <h4>Convergências entre clientes</h4>
+      <p>Necessidade de operações massivas (atribuição em lote, exclusão de tags, exportações), demanda crescente por IA no direcionamento e dores comuns em logoff automático e mensagens robotizadas.</p>
+    </div>
+    <div class="conduct-card">
+      <div class="conduct-icon purple">📊</div>
+      <h4>Demandas de dados</h4>
+      <p>Tanto a FGF (BI customizado) quanto a GVC (limpeza de tickets de teste) e a Decorlux (auditoria de tags) reforçam que governança e visibilidade de dados é prioridade transversal.</p>
+    </div>
+    <div class="conduct-card">
+      <div class="conduct-icon dark">🤝</div>
+      <h4>Postura da equipe</h4>
+      <p>Condução acolhedora, escuta ativa e capacidade técnica de propor soluções em tempo real. Pontos de evolução em registro estruturado e expectativas de prazos com o cliente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============= CLIENTES ============= -->
+<section id="clientes">
+  <div class="section-header">
+    <span class="section-tag">Os clientes</span>
+    <h2 class="section-title">Perfil de cada cliente entrevistado</h2>
+    <p class="section-sub">Contexto, tempo de casa e principais frentes de discussão em cada conversa.</p>
+  </div>
+
+  <div class="clients-grid">
+
+    <article class="client-card" style="--bar-color: var(--neppo-green);">
+      <h3 class="client-name">FGF · Grupo FGF</h3>
+      <p class="client-meta">
+        <span>1 ano de Neppo</span><span class="dot"></span><span>Desde mai/2025</span>
+      </p>
+      <p class="client-desc">Cliente já estabilizado após a migração de números e linha fixa. Foco em maturação operacional: BI, IA para dúvidas frequentes (60% do volume), gestão de usuários e finalização de atendimentos pelo cliente final.</p>
+      <div class="badge-row">
+        <span class="badge green">Operação estável</span>
+        <span class="badge purple">Interesse em IA</span>
+        <span class="badge">BI / Dados</span>
+      </div>
+    </article>
+
+    <article class="client-card" style="--bar-color: var(--neppo-purple);">
+      <h3 class="client-name">Grupo GVC</h3>
+      <p class="client-meta">
+        <span>Migrou do Octadesk</span><span class="dot"></span><span>Cliente beta de Tickets</span>
+      </p>
+      <p class="client-desc">Reunião com Monique (Inovação), Jéssica (Operação), Guilherme (TI) e Bruno. Migração motivada por integração com Sankhya. Módulo de Tickets ainda aquém do Octadesk e gera atritos operacionais relevantes.</p>
+      <div class="badge-row">
+        <span class="badge warn">Atrito com Tickets</span>
+        <span class="badge purple">Integração Sankhya</span>
+        <span class="badge">Treinamento</span>
+      </div>
+    </article>
+
+    <article class="client-card" style="--bar-color: var(--neppo-dark);">
+      <h3 class="client-name">Decorlux</h3>
+      <p class="client-meta">
+        <span>Comercial + Financeiro</span><span class="dot"></span><span>11 vendedores</span>
+      </p>
+      <p class="client-desc">Reunião com Alef (Comercial/TI) e Luiz (Financeiro). 99,9% do atendimento via WhatsApp ativo. Demanda forte por humanização (remover mensagens automáticas), gestão de carteiras e WhatsApp Coexistente.</p>
+      <div class="badge-row">
+        <span class="badge green">Aguarda WhatsApp Coexistente</span>
+        <span class="badge warn">Robotização percebida</span>
+        <span class="badge">Régua Sankhya</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============= CONDUÇÃO ============= -->
+<section id="conducao">
+  <div class="section-header">
+    <span class="section-tag">Condução das entrevistas</span>
+    <h2 class="section-title">Como foi a postura da equipe de Produto</h2>
+    <p class="section-sub">Avaliação qualitativa do trabalho de discovery realizado pela equipe nos três encontros.</p>
+  </div>
+
+  <div class="conduction-grid">
+    <div class="conduct-card">
+      <div class="conduct-icon">✅</div>
+      <h4>Apresentação e contexto</h4>
+      <p>Em todas as reuniões a equipe se apresentou com clareza (Valdson, Gustavo, Ana Clara, Thalita, Jennifer) e contextualizou os objetivos: coletar feedback, entender expectativa de negócio e mapear melhorias.</p>
+    </div>
+    <div class="conduct-card">
+      <div class="conduct-icon">👂</div>
+      <h4>Escuta ativa</h4>
+      <p>Espaço claro para o cliente compartilhar dores. Em Decorlux, o time deixou Alef compartilhar tela e demonstrar problemas (respostas duplicadas, fluxo de mensagens). Em GVC, Jéssica chegou a criar projeto ao vivo.</p>
+    </div>
+    <div class="conduct-card">
+      <div class="conduct-icon purple">💡</div>
+      <h4>Soluções em tempo real</h4>
+      <p>Valdson conseguiu propor caminhos imediatos: uso da função "pausa", régua de cobrança nativa do Sankhya, IA para direcionamento por nome e WhatsApp Coexistente como saída para o caso Decorlux.</p>
+    </div>
+    <div class="conduct-card">
+      <div class="conduct-icon">🧭</div>
+      <h4>Diferenciação entre técnico e operacional</h4>
+      <p>No caso GVC, a proposta de dividir o treinamento em duas etapas (admins + usuários finais) mostrou maturidade em entender perfis e estruturar capacitação.</p>
+    </div>
+    <div class="conduct-card">
+      <div class="conduct-icon dark">⚠️</div>
+      <h4>Ponto a evoluir: prazos</h4>
+      <p>Em diversos momentos a equipe se comprometeu com retornos ("vou conversar com a Jennifer", "vou solicitar aos desenvolvedores") sem associar datas. Isso gera ansiedade no cliente, principalmente na GVC, que cobra evolução desde a contratação.</p>
+    </div>
+    <div class="conduct-card">
+      <div class="conduct-icon dark">📝</div>
+      <h4>Ponto a evoluir: registro estruturado</h4>
+      <p>A captura de demandas dependeu de notas das transcrições do Gemini. Recomenda-se template padronizado de discovery (dor, contexto, impacto, frequência, próxima ação) para alimentar o backlog diretamente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============= INSIGHTS ============= -->
+<section id="insights">
+  <div class="section-header">
+    <span class="section-tag">Insights estratégicos</span>
+    <h2 class="section-title">Padrões que emergiram nas três conversas</h2>
+    <p class="section-sub">Leitura transversal das entrevistas, identificando temas estruturais que vão além de tarefas pontuais.</p>
+  </div>
+
+  <div class="insights-wrap">
+
+    <div class="insight-row">
+      <div class="insight-num">01</div>
+      <div class="insight-body">
+        <h4>Operações em massa são uma lacuna estrutural</h4>
+        <p>FGF pede exportação de usuários, Decorlux pede atribuição massiva de carteira (5.000 a 8.000 clientes), GVC pede exclusão de tags e tickets de teste. A plataforma não oferece ferramentas administrativas em lote — isso multiplica trabalho operacional e desestimula adoção.</p>
+      </div>
+      <div class="insight-side">3 clientes · transversal</div>
+    </div>
+
+    <div class="insight-row">
+      <div class="insight-num">02</div>
+      <div class="insight-body">
+        <h4>Humanização do atendimento é tema central</h4>
+        <p>Decorlux explicitou: mensagens automáticas de transferência fazem o cliente se sentir falando com robô. A perda das fotos individuais de vendedores reforça essa percepção. Há uma tensão entre padronização institucional e relacionamento pessoal que precisa ser endereçada no produto.</p>
+      </div>
+      <div class="insight-side">Decorlux · alto impacto</div>
+    </div>
+
+    <div class="insight-row">
+      <div class="insight-num">03</div>
+      <div class="insight-body">
+        <h4>IA tem demanda real e mensurável</h4>
+        <p>FGF afirma que 60% do volume são dúvidas que caem para humano — oportunidade clara de IA. Decorlux quer IA para identificar nomes de vendedores e direcionar. Apresentar a solução de IA da Neppo é prioridade comercial e de produto nos próximos ciclos.</p>
+      </div>
+      <div class="insight-side">FGF + Decorlux</div>
+    </div>
+
+    <div class="insight-row">
+      <div class="insight-num">04</div>
+      <div class="insight-body">
+        <h4>Logoff automático aparece em mais de um cliente</h4>
+        <p>Tanto FGF quanto Decorlux relatam deslogamento automático da plataforma. É um problema técnico recorrente que afeta confiança no produto. Precisa de tratamento centralizado, não cliente a cliente.</p>
+      </div>
+      <div class="insight-side">FGF + Decorlux · bug recorrente</div>
+    </div>
+
+    <div class="insight-row">
+      <div class="insight-num">05</div>
+      <div class="insight-body">
+        <h4>Sankhya é um ativo estratégico</h4>
+        <p>A integração nativa com Sankhya foi o motivador da migração da GVC e habilita a régua de cobrança da Decorlux. Reforçar e divulgar essa integração é um diferencial de posicionamento que ainda parece sub-utilizado comercialmente.</p>
+      </div>
+      <div class="insight-side">GVC + Decorlux</div>
+    </div>
+
+    <div class="insight-row">
+      <div class="insight-num">06</div>
+      <div class="insight-body">
+        <h4>Módulo de Tickets é dívida técnica e contratual</h4>
+        <p>GVC contratou a Neppo com a promessa explícita de evolução do módulo de Tickets para superar o Octadesk. Hoje os atritos são severos: anexos renomeados, fluxo de responsável manual, erro 401, sem interação por e-mail. É risco de churn estratégico.</p>
+      </div>
+      <div class="insight-side">GVC · risco alto</div>
+    </div>
+
+    <div class="insight-row">
+      <div class="insight-num">07</div>
+      <div class="insight-body">
+        <h4>BI e dashboards são próxima fronteira</h4>
+        <p>FGF pede exemplos de chamada de dados para BI próprio. GVC quer corrigir métricas distorcidas por tickets de teste. Há demanda por self-service de dados — APIs documentadas, exportações flexíveis e dashboards configuráveis.</p>
+      </div>
+      <div class="insight-side">FGF + GVC</div>
+    </div>
+
+    <div class="insight-row">
+      <div class="insight-num">08</div>
+      <div class="insight-body">
+        <h4>Visibilidade do gestor sobre o atendimento ativo é frágil</h4>
+        <p>FGF relata que o gestor não enxerga atendimentos travados no bot de finalização pela tela de monitoramento. Decorlux relata distribuição indevida de chamados quando vendedor desloga. A camada de gestão precisa de visão em tempo real mais robusta.</p>
+      </div>
+      <div class="insight-side">FGF + Decorlux</div>
+    </div>
+
+    <div class="insight-row">
+      <div class="insight-num">09</div>
+      <div class="insight-body">
+        <h4>WhatsApp Coexistente é alavanca de retenção</h4>
+        <p>Decorlux explicitamente adiou o recolhimento dos celulares físicos dos vendedores aguardando essa funcionalidade. É um caso real de feature que destrava adoção. Vale acelerar o lançamento e antecipar comunicação para outros clientes em situação parecida.</p>
+      </div>
+      <div class="insight-side">Decorlux · gatilho de adoção</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============= TAREFAS ============= -->
+<section id="tarefas">
+  <div class="section-header">
+    <span class="section-tag">Backlog de Produto</span>
+    <h2 class="section-title">Tarefas a serem abertas</h2>
+    <p class="section-sub">Cards consolidados a partir das três entrevistas, classificados por cliente e prioridade. Filtre pelo cliente abaixo.</p>
+  </div>
+
+  <div class="tasks-controls">
+    <button class="filter-btn active" data-filter="all">Todas (26)</button>
+    <button class="filter-btn" data-filter="fgf">FGF</button>
+    <button class="filter-btn" data-filter="gvc">GVC</button>
+    <button class="filter-btn" data-filter="decorlux">Decorlux</button>
+    <button class="filter-btn" data-filter="high">Alta prioridade</button>
+  </div>
+
+  <div class="tasks-grid" id="tasksGrid">
+
+    <!-- FGF -->
+    <div class="task-card" data-client="fgf" data-priority="high" style="--task-color: var(--neppo-green);">
+      <div class="task-top"><span class="task-client">FGF</span><span class="priority high">Alta</span></div>
+      <h4 class="task-title">Finalização do atendimento pelo cliente no bot</h4>
+      <p class="task-desc">Cliente não consegue encerrar atendimento quando está no bot de finalização. Gestor também não enxerga isso pela tela de monitoramento. Validar se a nova pesquisa de satisfação resolve.</p>
+      <div class="task-foot"><span class="task-tag">Bot</span><span class="task-tag">Monitoramento</span></div>
+    </div>
+
+    <div class="task-card" data-client="fgf" data-priority="mid" style="--task-color: var(--neppo-green);">
+      <div class="task-top"><span class="task-client">FGF</span><span class="priority mid">Média</span></div>
+      <h4 class="task-title">Exemplos de chamada de dados para BI</h4>
+      <p class="task-desc">Criar documentação com exemplos de chamadas de API para consumo em BI próprio do cliente. Customer Success deve mapear quais dados eles precisam consumir.</p>
+      <div class="task-foot"><span class="task-tag">BI</span><span class="task-tag">API</span><span class="task-tag">Documentação</span></div>
+    </div>
+
+    <div class="task-card" data-client="fgf" data-priority="high" style="--task-color: var(--neppo-green);">
+      <div class="task-top"><span class="task-client">FGF</span><span class="priority high">Alta</span></div>
+      <h4 class="task-title">Corrigir logoff automático da plataforma</h4>
+      <p class="task-desc">Usuários estão sendo deslogados automaticamente. Mesmo problema relatado pela Decorlux — tratar como bug centralizado.</p>
+      <div class="task-foot"><span class="task-tag">Bug</span><span class="task-tag">Autenticação</span></div>
+    </div>
+
+    <div class="task-card" data-client="fgf" data-priority="high" style="--task-color: var(--neppo-green);">
+      <div class="task-top"><span class="task-client">FGF</span><span class="priority high">Alta</span></div>
+      <h4 class="task-title">Apresentar solução de IA ao cliente</h4>
+      <p class="task-desc">Agendar com Customer Success demonstração de IA. Cerca de 60% do volume do cliente são dúvidas que acabam caindo para humano — oportunidade clara de automação.</p>
+      <div class="task-foot"><span class="task-tag">IA</span><span class="task-tag">CS</span><span class="task-tag">Oportunidade</span></div>
+    </div>
+
+    <div class="task-card" data-client="fgf" data-priority="mid" style="--task-color: var(--neppo-green);">
+      <div class="task-top"><span class="task-client">FGF</span><span class="priority mid">Média</span></div>
+      <h4 class="task-title">Campo "empresa" na tela de usuário</h4>
+      <p class="task-desc">Implementar campo empresa no cadastro de usuários e permitir upload de contatos com essa informação. Apoia segmentação e gestão B2B.</p>
+      <div class="task-foot"><span class="task-tag">Cadastro</span><span class="task-tag">Import</span></div>
+    </div>
+
+    <div class="task-card" data-client="fgf" data-priority="mid" style="--task-color: var(--neppo-green);">
+      <div class="task-top"><span class="task-client">FGF</span><span class="priority mid">Média</span></div>
+      <h4 class="task-title">Não contabilizar tempo de inatividade no bot no TMA do agente</h4>
+      <p class="task-desc">O tempo em que o atendimento está no bot está inflando o Tempo Médio de Atendimento dos agentes humanos, distorcendo a métrica.</p>
+      <div class="task-foot"><span class="task-tag">Métricas</span><span class="task-tag">TMA</span></div>
+    </div>
+
+    <div class="task-card" data-client="fgf" data-priority="low" style="--task-color: var(--neppo-green);">
+      <div class="task-top"><span class="task-client">FGF</span><span class="priority low">Baixa</span></div>
+      <h4 class="task-title">Exportação e filtro de usuários</h4>
+      <p class="task-desc">Adicionar opção de exportar relatório de usuários e um select com filtros dentro da própria tela de gestão.</p>
+      <div class="task-foot"><span class="task-tag">Export</span><span class="task-tag">Filtros</span></div>
+    </div>
+
+    <!-- GVC -->
+    <div class="task-card" data-client="gvc" data-priority="high" style="--task-color: var(--neppo-purple);">
+      <div class="task-top"><span class="task-client">GVC</span><span class="priority high">Alta</span></div>
+      <h4 class="task-title">Tickets: separar Criador, Responsável e Participantes</h4>
+      <p class="task-desc">Atualmente o "responsável" precisa ser trocado manualmente a cada interação. Cliente pede campos distintos para criador, responsável atual e participantes, com regra de que só o criador finaliza o ticket.</p>
+      <div class="task-foot"><span class="task-tag">Tickets</span><span class="task-tag">Fluxo</span><span class="task-tag">Crítico</span></div>
+    </div>
+
+    <div class="task-card" data-client="gvc" data-priority="high" style="--task-color: var(--neppo-purple);">
+      <div class="task-top"><span class="task-client">GVC</span><span class="priority high">Alta</span></div>
+      <h4 class="task-title">Anexos: manter nome original do arquivo</h4>
+      <p class="task-desc">Sistema está renomeando todos os anexos para "arquivo 1", "anexo 1" etc. Equipe precisa baixar, renomear manualmente e reanexar — multiplica trabalho operacional.</p>
+      <div class="task-foot"><span class="task-tag">Anexos</span><span class="task-tag">Bug</span></div>
+    </div>
+
+    <div class="task-card" data-client="gvc" data-priority="high" style="--task-color: var(--neppo-purple);">
+      <div class="task-top"><span class="task-client">GVC</span><span class="priority high">Alta</span></div>
+      <h4 class="task-title">Corrigir erro 401 ao finalizar tickets antigos</h4>
+      <p class="task-desc">Mesmo o criador do ticket recebe erro 401 (sem permissão) ao tentar finalizar chamados antigos. Já catalogado por Thalita como PROD.</p>
+      <div class="task-foot"><span class="task-tag">Bug</span><span class="task-tag">Permissões</span></div>
+    </div>
+
+    <div class="task-card" data-client="gvc" data-priority="high" style="--task-color: var(--neppo-purple);">
+      <div class="task-top"><span class="task-client">GVC</span><span class="priority high">Alta</span></div>
+      <h4 class="task-title">Excluir tickets de teste no banco de dados</h4>
+      <p class="task-desc">Tickets criados durante implantação estão distorcendo indicadores. Exclusão via interface não é possível — solicitar aos desenvolvedores e informar o número da solicitação à equipe.</p>
+      <div class="task-foot"><span class="task-tag">Banco</span><span class="task-tag">Indicadores</span></div>
+    </div>
+
+    <div class="task-card" data-client="gvc" data-priority="mid" style="--task-color: var(--neppo-purple);">
+      <div class="task-top"><span class="task-client">GVC</span><span class="priority mid">Média</span></div>
+      <h4 class="task-title">Interação em tickets por e-mail externo</h4>
+      <p class="task-desc">No Octadesk usuários externos respondiam tickets pela própria caixa de entrada. Na Neppo é obrigatório logar. Avaliar suporte a resposta inbound por e-mail.</p>
+      <div class="task-foot"><span class="task-tag">Tickets</span><span class="task-tag">E-mail</span></div>
+    </div>
+
+    <div class="task-card" data-client="gvc" data-priority="mid" style="--task-color: var(--neppo-purple);">
+      <div class="task-top"><span class="task-client">GVC</span><span class="priority mid">Média</span></div>
+      <h4 class="task-title">Gestão e exclusão de tags</h4>
+      <p class="task-desc">Permitir restringir quem cria tags e criar processo de exclusão (mesmo que via solicitação ao suporte com SLA claro). Tags duplicadas estão poluindo filtros.</p>
+      <div class="task-foot"><span class="task-tag">Tags</span><span class="task-tag">Governança</span></div>
+    </div>
+
+    <div class="task-card" data-client="gvc" data-priority="mid" style="--task-color: var(--neppo-purple);">
+      <div class="task-top"><span class="task-client">GVC</span><span class="priority mid">Média</span></div>
+      <h4 class="task-title">Validação amigável na criação de projetos</h4>
+      <p class="task-desc">Erros silenciosos quando há espaços no nome ou na chave. Exibir mensagens claras na interface sobre limites de caracteres e formatação.</p>
+      <div class="task-foot"><span class="task-tag">UX</span><span class="task-tag">Validação</span></div>
+    </div>
+
+    <div class="task-card" data-client="gvc" data-priority="high" style="--task-color: var(--neppo-purple);">
+      <div class="task-top"><span class="task-client">GVC</span><span class="priority high">Alta</span></div>
+      <h4 class="task-title">Treinamento técnico de Tickets (2 etapas)</h4>
+      <p class="task-desc">Agendar treinamento dividido em (1) admins — Jéssica e Guilherme — sobre workflow e (2) usuários finais — CEX e Logística. Enviar link de agenda e documentação atualizada.</p>
+      <div class="task-foot"><span class="task-tag">Treinamento</span><span class="task-tag">CS</span></div>
+    </div>
+
+    <div class="task-card" data-client="gvc" data-priority="mid" style="--task-color: var(--neppo-purple);">
+      <div class="task-top"><span class="task-client">GVC</span><span class="priority mid">Média</span></div>
+      <h4 class="task-title">Cronograma formal de implementações</h4>
+      <p class="task-desc">Valdson se comprometeu a enviar cronograma de evoluções de tickets para a GVC, tratada como "cliente beta" estratégico. Formalizar prazos via e-mail.</p>
+      <div class="task-foot"><span class="task-tag">Roadmap</span><span class="task-tag">Comunicação</span></div>
+    </div>
+
+    <div class="task-card" data-client="gvc" data-priority="low" style="--task-color: var(--neppo-purple);">
+      <div class="task-top"><span class="task-client">GVC</span><span class="priority low">Baixa</span></div>
+      <h4 class="task-title">Mapeamento formal de requisitos pela GVC</h4>
+      <p class="task-desc">Solicitar ao grupo que formalize por escrito as necessidades específicas de usabilidade e fluxos. Thalita finaliza a listagem de melhorias para compartilhar.</p>
+      <div class="task-foot"><span class="task-tag">Discovery</span></div>
+    </div>
+
+    <!-- DECORLUX -->
+    <div class="task-card" data-client="decorlux" data-priority="high" style="--task-color: var(--neppo-dark);">
+      <div class="task-top"><span class="task-client">Decorlux</span><span class="priority high">Alta</span></div>
+      <h4 class="task-title">Remover mensagens automáticas não obrigatórias do chatbot</h4>
+      <p class="task-desc">Remover "aguarde, estou transferindo" e similares para humanizar o atendimento. Deixar apenas o mínimo obrigatório. Jennifer coordena a remoção.</p>
+      <div class="task-foot"><span class="task-tag">Bot</span><span class="task-tag">Humanização</span></div>
+    </div>
+
+    <div class="task-card" data-client="decorlux" data-priority="high" style="--task-color: var(--neppo-dark);">
+      <div class="task-top"><span class="task-client">Decorlux</span><span class="priority high">Alta</span></div>
+      <h4 class="task-title">Atribuição massiva de clientes a agentes</h4>
+      <p class="task-desc">Hoje a transferência de carteira é individual. Para uma base de 5.000 a 8.000 clientes, é inviável. Cerca de 3.000 clientes estão sem dono no sistema.</p>
+      <div class="task-foot"><span class="task-tag">Bulk</span><span class="task-tag">Carteira</span></div>
+    </div>
+
+    <div class="task-card" data-client="decorlux" data-priority="high" style="--task-color: var(--neppo-dark);">
+      <div class="task-top"><span class="task-client">Decorlux</span><span class="priority high">Alta</span></div>
+      <h4 class="task-title">Corrigir formato de "Responder" mensagem</h4>
+      <p class="task-desc">Ao usar a função de responder uma mensagem específica, o texto aparece redundante e confuso para o cliente. Revisar o template do quote.</p>
+      <div class="task-foot"><span class="task-tag">Chat</span><span class="task-tag">UX</span></div>
+    </div>
+
+    <div class="task-card" data-client="decorlux" data-priority="high" style="--task-color: var(--neppo-dark);">
+      <div class="task-top"><span class="task-client">Decorlux</span><span class="priority high">Alta</span></div>
+      <h4 class="task-title">Corrigir logoff automático da plataforma</h4>
+      <p class="task-desc">Mesmo bug relatado pela FGF. Tratar como problema centralizado de autenticação/sessão.</p>
+      <div class="task-foot"><span class="task-tag">Bug</span><span class="task-tag">Autenticação</span></div>
+    </div>
+
+    <div class="task-card" data-client="decorlux" data-priority="high" style="--task-color: var(--neppo-dark);">
+      <div class="task-top"><span class="task-client">Decorlux</span><span class="priority high">Alta</span></div>
+      <h4 class="task-title">Apresentar WhatsApp Coexistente quando lançar</h4>
+      <p class="task-desc">Funcionalidade adiou recolhimento de 11 celulares físicos. Permite sincronizar histórico mantendo autonomia dos vendedores. Demonstrar assim que disponível (previsão: próximo mês).</p>
+      <div class="task-foot"><span class="task-tag">WhatsApp</span><span class="task-tag">Retenção</span></div>
+    </div>
+
+    <div class="task-card" data-client="decorlux" data-priority="mid" style="--task-color: var(--neppo-dark);">
+      <div class="task-top"><span class="task-client">Decorlux</span><span class="priority mid">Média</span></div>
+      <h4 class="task-title">Demonstrar IA para direcionamento por nome</h4>
+      <p class="task-desc">Clientes não seguem a árvore de menu e digitam nomes de vendedores. Demonstrar fluxo de IA que identifica o nome e direciona automaticamente.</p>
+      <div class="task-foot"><span class="task-tag">IA</span><span class="task-tag">Demo</span></div>
+    </div>
+
+    <div class="task-card" data-client="decorlux" data-priority="mid" style="--task-color: var(--neppo-dark);">
+      <div class="task-top"><span class="task-client">Decorlux</span><span class="priority mid">Média</span></div>
+      <h4 class="task-title">Avaliar função "Pausa" para evitar redistribuição indevida</h4>
+      <p class="task-desc">Quando vendedor desloga (almoço, fim do dia), atendimentos ativos vão para outros departamentos. Validar se o uso correto da pausa resolve.</p>
+      <div class="task-foot"><span class="task-tag">Fila</span><span class="task-tag">Operação</span></div>
+    </div>
+
+    <div class="task-card" data-client="decorlux" data-priority="mid" style="--task-color: var(--neppo-dark);">
+      <div class="task-top"><span class="task-client">Decorlux</span><span class="priority mid">Média</span></div>
+      <h4 class="task-title">Régua de cobrança via WhatsApp (Sankhya)</h4>
+      <p class="task-desc">Luiz vai configurar a régua nativa do Sankhya com apoio técnico Neppo. Testar com base filtrada para evitar disparos incorretos. Limite atual: 10.000 mensagens/dia.</p>
+      <div class="task-foot"><span class="task-tag">Sankhya</span><span class="task-tag">Cobrança</span></div>
+    </div>
+
+    <div class="task-card" data-client="decorlux" data-priority="low" style="--task-color: var(--neppo-dark);">
+      <div class="task-top"><span class="task-client">Decorlux</span><span class="priority low">Baixa</span></div>
+      <h4 class="task-title">Verificar suporte a figurinhas via API Meta</h4>
+      <p class="task-desc">Vendedores usam stickers para "quebrar o gelo". Hoje é limitação da Meta, mas verificar previsão de liberação.</p>
+      <div class="task-foot"><span class="task-tag">Meta</span><span class="task-tag">Investigação</span></div>
+    </div>
+
+    <div class="task-card" data-client="decorlux" data-priority="low" style="--task-color: var(--neppo-dark);">
+      <div class="task-top"><span class="task-client">Decorlux</span><span class="priority low">Baixa</span></div>
+      <h4 class="task-title">Excluir tags obsoletas via banco</h4>
+      <p class="task-desc">Alef solicita remoção de tags com datas antigas que poluem o sistema. Alinhar processo com Jennifer.</p>
+      <div class="task-foot"><span class="task-tag">Tags</span><span class="task-tag">Suporte</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============= PRÓXIMOS PASSOS ============= -->
+<section id="proximos-passos">
+  <div class="section-header">
+    <span class="section-tag">Próximos passos</span>
+    <h2 class="section-title">O caminho daqui</h2>
+    <p class="section-sub">Sequência sugerida de ações para os próximos ciclos de produto, com base na leitura consolidada das entrevistas.</p>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">Imediato · próximos 7 dias</div>
+      <h4 class="timeline-title">Abrir as tarefas e endereçar bugs transversais</h4>
+      <p class="timeline-text">Criar tickets de produto para todas as 26 demandas mapeadas. Priorizar logoff automático (FGF + Decorlux), erro 401 (GVC) e formato de "responder" (Decorlux) por serem dores recorrentes ou bloqueantes.</p>
+    </div>
+
+    <div class="timeline-item purple">
+      <div class="timeline-date">Curto prazo · 2 a 3 semanas</div>
+      <h4 class="timeline-title">Devolutiva formal a cada cliente</h4>
+      <p class="timeline-text">Enviar e-mail consolidado a FGF, GVC e Decorlux com cada demanda, sua classificação (em análise, em desenvolvimento, fora de escopo) e prazos estimados. Para a GVC, anexar cronograma formal das evoluções de Tickets.</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Curto prazo · até 30 dias</div>
+      <h4 class="timeline-title">Demos e treinamentos agendados</h4>
+      <p class="timeline-text">Realizar demonstração de IA para FGF e Decorlux. Conduzir treinamento técnico de Tickets em duas etapas para a GVC. Apresentar WhatsApp Coexistente para Decorlux assim que disponível.</p>
+    </div>
+
+    <div class="timeline-item purple">
+      <div class="timeline-date">Médio prazo · 60 a 90 dias</div>
+      <h4 class="timeline-title">Squad dedicada a operações em massa</h4>
+      <p class="timeline-text">Atribuição massiva, exportação de usuários, gestão de tags, exclusão controlada e bulk imports são padrão entre os três clientes. Justifica uma frente dedicada de "Admin Tools" no roadmap.</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Estrutural · contínuo</div>
+      <h4 class="timeline-title">Processo de discovery padronizado</h4>
+      <p class="timeline-text">Adotar template de captura de demandas durante entrevistas (dor, contexto, frequência, impacto, próxima ação). Reduz dependência das transcrições do Gemini e acelera a abertura de cards no backlog.</p>
+    </div>
+
+  </div>
+
+  <div class="conclusion">
+    <div class="conclusion-content">
+      <h2>Resumo executivo</h2>
+      <p>Os três clientes confiam na Neppo e querem evoluir junto. As entrevistas reforçam que a plataforma está no caminho certo, mas a próxima onda de valor está em ferramentas administrativas em massa, IA bem demonstrada e estabilidade de operação no dia a dia.</p>
+      <ul class="conclusion-points">
+        <li><span class="check">✓</span><span><strong>Curto prazo:</strong> resolver bugs transversais (logoff automático, erro 401, formato de resposta) e dar devolutiva formal com prazos.</span></li>
+        <li><span class="check">✓</span><span><strong>Médio prazo:</strong> evoluir o módulo de Tickets para honrar o compromisso contratual com a GVC e lançar/comunicar WhatsApp Coexistente.</span></li>
+        <li><span class="check">✓</span><span><strong>Estratégico:</strong> consolidar IA, BI/dados e operações em massa como pilares do roadmap dos próximos trimestres.</span></li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <div class="logo"><span class="logo-dot"></span>Neppo · Produto</div>
+  <div>Análise interna · Maio 2026 · Entrevistas FGF · GVC · Decorlux</div>
+</footer>
+
+<script>
+  // Menu mobile
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-link');
+  function updateActive() {
+    let current = '';
+    sections.forEach(s => {
+      const top = s.getBoundingClientRect().top;
+      if (top <= 120) current = s.id;
+    });
+    navAnchors.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateActive);
+  updateActive();
+
+  // Filtro de tarefas
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const taskCards = document.querySelectorAll('.task-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      taskCards.forEach(card => {
+        const matchClient = (filter === 'all') || (card.dataset.client === filter);
+        const matchPriority = (filter === 'high' && card.dataset.priority === 'high');
+        const show = (filter === 'all') || matchClient || matchPriority;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
